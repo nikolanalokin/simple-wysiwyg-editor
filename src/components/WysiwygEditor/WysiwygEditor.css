@@ -1,0 +1,40 @@
+.wysiwyg-container {
+    display: flex;
+}
+
+.wysiwyg-input {
+    background-color: #eee;
+    width: 500px;
+    height: 300px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 12px;
+    text-align: initial;
+    white-space: pre-wrap;
+    caret-color: black;
+    unicode-bidi: plaintext;
+}
+
+.wysiwyg__mnemonic-select {
+    margin-left: 16px;
+}
+
+.wysiwyg-node--mnemonic {
+    /* padding: 2px 4px;
+    border-radius: 2px;
+    background-color: blueviolet;
+    color: white; */
+    color: blueviolet;
+    user-select: all;
+}
+
+input.wysiwyg-node--mnemonic {
+    margin: unset;
+    padding: unset;
+    border: unset;
+    background: none;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: center;
+}
