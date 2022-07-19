@@ -1,4 +1,4 @@
-import { MNEMONIC_REGEX } from './renderNodes'
+import { MNEMONIC_REGEX, renderMnemonicHTML } from './renderNodes'
 import type { TextPart } from './types'
 
 export function insertHtmlInSelection (html) {
@@ -72,6 +72,15 @@ export function clearSelection () {
     } else if (selection.empty) {
         selection.empty()
     }
+}
+
+export function textPartsToHtml (textParts: TextPart[]): string {
+    if (!textParts) return ''
+
+    return textParts.map(part => {
+        if (part.type === 'mnemonic') return renderMnemonicHTML([part.value])
+        return part.value
+    }).join('')
 }
 
 export function htmlToTextParts (html: string): TextPart[] {

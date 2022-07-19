@@ -4,6 +4,8 @@ export interface TextPart {
 }
 
 export interface WysiwygEditorProps {
+    defaultValue?: TextPart[]
+    value?: TextPart[]
     onChange?: (textParts: TextPart[]) => void
 }
 

@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { MnemonicSelect } from '../MnemonicSelect/MnemonicSelect'
 import { WysiwygInput } from './WysiwygInput'
-import { focusEditableElement, htmlToTextParts, insertHtmlInSelection, isSelectionInsideInput } from './utils'
+import { focusEditableElement, htmlToTextParts, insertHtmlInSelection, isSelectionInsideInput, textPartsToHtml } from './utils'
 
 import './WysiwygEditor.css'
 import { renderText } from './renderNodes'
 import { useClipboardPaste } from './useClipboardPaste'
 
 import type { WysiwygEditorProps } from './types'
+import useControlled from '../../hooks/useControlled'
 
 const mnemonics = [
     'Подстановка 1',
@@ -17,11 +18,22 @@ const mnemonics = [
 ]
 
 export const WysiwygEditor: React.FC<WysiwygEditorProps> = (props) => {
-    const { onChange } = props
+    const {
+        defaultValue = [],
+        value,
+        onChange
+    } = props
 
     const inputId = 'wysiwyg-editor-test'
 
-    const [html, setHtml] = useState('')
+    const [html, setHtml] = useControlled({
+        controlled: value !== undefined ? textPartsToHtml(value) : undefined,
+        default: textPartsToHtml(defaultValue)
+    })
+
+    useEffect(() => {
+        if (value !== undefined) setHtml(textPartsToHtml(value))
+    }, [value])
 
     useEffect(() => {
         if (onChange) {
